@@ -1,5 +1,13 @@
-import { Button, Grid, TextField } from '@material-ui/core/';
 import { useEffect, useState } from 'react';
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+} from 'react-bootstrap';
 
 const Contatos = () => {
   const url = 'http://localhost:5000/message';
@@ -52,73 +60,98 @@ const Contatos = () => {
 
   return (
     <>
-      <Grid container direction='row' xs={4} md={6}>
-        <TextField
-          id='name'
-          label='Name'
-          value={author}
-          onChange={(event) => {
-            setAuthor(event.target.value);
-          }}
-          fullWidth
-        />
-        <TextField
-          id='message'
-          label='Message'
-          value={content}
-          onChange={(event) => {
-            setContent(event.target.value);
-          }}
-          fullWidth
-        />
-      </Grid>
+      <Container>
+        <Row>
+          <Col xs='12' md='6' lg='4'>
+            <Card>
+              <Card.Body>
+                <Card.Title>Entre em contato</Card.Title>
 
-      {validator && (
-        <div
-          className='alert alert-warning alert-dismissible fade show mt-2'
-          role='alert'
-        >
-          <strong>Por favor preencha todos os campos!</strong>
-          <button
-            type='button'
-            className='btn-close'
-            data-bs-dismiss='alert'
-            aria-label='Close'
-          ></button>
-        </div>
-      )}
+                {validator && (
+                  <Alert
+                    variant='warning'
+                    dismissible
+                    fade
+                    show
+                    className='mt-2'
+                    role='alert'
+                  >
+                    <strong>Por favor preencha todos os campos!</strong>
+                    <Button
+                      type='button'
+                      className='btn-close'
+                      data-bs-dismiss='alert'
+                      aria-label='Close'
+                    ></Button>
+                  </Alert>
+                )}
 
-      {success && (
-        <div
-          className='alert alert-success alert-dismissible fade show mt-2'
-          role='alert'
-        >
-          <strong>Mensagem foi enviada</strong>
-        </div>
-      )}
+                {success && (
+                  <Alert
+                    variant='success'
+                    dismissible
+                    fade
+                    show
+                    className='mt-2'
+                    role='alert'
+                  >
+                    <strong>Mensagem enviada</strong>
+                  </Alert>
+                )}
 
-      <Button
-        onClick={sendMessage}
-        className='mt-4'
-        variant='contained'
-        color='primary'
-      >
-        Enviar
-      </Button>
-
-      {message.map((content) => {
-        return (
-          <div className='card mt-2' key={content.id}>
-            <div className='card-body'>
-              <h5 className='card-title'>{content.email}</h5>
-              <p className='card-text'>{content.message}</p>
-              <p className='card-text'>
-                <small className='text-muted'>{content.created_at}</small>
-              </p>
-            </div>
-          </div>
-        );
-      })}
+                <Form.Group>
+                  <Form.Label controlId='nome'>Nome</Form.Label>
+                  <Form.Control
+                    type='text'
+                    required
+                    id='nome'
+                    onChange={(event) => {
+                      setAuthor(event.target.value);
+                    }}
+                    value={author}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label controlId='mensagem'>Mensagem</Form.Label>
+                  <textarea
+                    required
+                    id='mensagem'
+                    value={content}
+                    onChange={(event) => {
+                      setContent(event.target.value);
+                    }}
+                    className='form-control'
+                  ></textarea>
+                </Form.Group>
+                <Button
+                  onClick={sendMessage}
+                  className='mt-2'
+                  variant='primary'
+                >
+                  Enviar
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs='12' md='6' lg='8'>
+            {message.map((content) => {
+              return (
+                <Card className='mb-2' key={content.id}>
+                  <Card.Body>
+                    <Card.Title>{content.email}</Card.Title>
+                    <Card.Text>{content.message}</Card.Text>
+                    <Card.Text>
+                      <small className='text-muted'>
+                        {new Date(content.created_at).toDateString()}
+                      </small>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

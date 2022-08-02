@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Modal, ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import cartActions from '../store/actions/cart';
 
@@ -20,12 +20,16 @@ const Cart = () => {
 
   return (
     <>
-      <Button variation='link' onClick={() => setShowModal(true)}>
+      <Button
+        variation='link'
+        onClick={() => setShowModal(true)}
+        className='nav-link'
+      >
         <div className='d-flex gap-2 align-items-center'>
           <span>
             <i className='fas fa-shopping-cart'></i>
           </span>
-          <span className='badge rounded-pill'>{cart.value}</span>
+          <span>{cart.value > 0 ? cart.value : null}</span>
         </div>
       </Button>
 
