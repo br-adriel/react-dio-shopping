@@ -1,6 +1,6 @@
 # Interface de loja de camisas esportivas (fork) :soccer:
 
-Interface de loja de camisas exportivas desenvolvida em React e disponibilizada por instrutora da
+Interface de loja de camisas esportivas desenvolvida em React e disponibilizada por instrutora da
 [DIO](https://www.dio.me/sign-in) durante um curso da plataforma para que os alunos pudessem a estudar,
 conectar com uma aplicação backend e personalizá-la.
 
