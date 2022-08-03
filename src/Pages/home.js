@@ -35,7 +35,7 @@ const HomePage = () => {
     <Container>
       <Row>
         <Col lg='3'>
-          <Card className='shadow-sm border-0'>
+          <Card className='shadow-sm border-0 mb-3'>
             <Card.Body>
               <Card.Title className='text-center'>Categorias</Card.Title>
               <ListGroup variant='flush'>
@@ -70,8 +70,16 @@ const HomePage = () => {
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 20px;
+
+  @media screen and (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export default HomePage;

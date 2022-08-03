@@ -62,7 +62,7 @@ const Contatos = () => {
     <>
       <Container>
         <Row>
-          <Col xs='12' md='6' lg='4'>
+          <Col xs='12' md='6' lg='4' className='mb-2'>
             <Card>
               <Card.Body>
                 <Card.Title>Entre em contato</Card.Title>
